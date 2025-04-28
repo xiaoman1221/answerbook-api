@@ -1,36 +1,62 @@
 async function handleRequest(request) {
 	const url = new URL(request.url);
 
-	let response;
-	if (url.pathname === '/') {
-		const lang = url.searchParams.get('lang') || 'zh-TW'; 
-		const answer = await getRandomAnswerFromKV(lang);
-		response = new Response(JSON.stringify({ answer: answer }), {
-			headers: { 'Content-Type': 'application/json' }
-		});
-	} else if (url.pathname === '/RandomPassword') {
-		const password = generateRandomPassword();
-		response = new Response(JSON.stringify({ RandomPassword: password }), {
-			headers: { 'Content-Type': 'application/json' }
-		});
-	} else if (url.pathname === '/TangPoetry') {
-		const poem = await getRandomPoemFromKV();
-		response = new Response(JSON.stringify({ poem: poem }), {
-			headers: { 'Content-Type': 'application/json' }
-		});
-	} else if (url.pathname === '/TempleOracleJP') {
-		const oracle = await getRandomOracleFromKV();
-		response = new Response(JSON.stringify({ oracle: oracle }), {
-			headers: { 'Content-Type': 'application/json' }
-		});
-	} else if (url.pathname === '/greWord') {
-		const greWord = await getRandomGreWordFromKV();
-		response = new Response(JSON.stringify({ greWord: greWord }), {
-			headers: { 'Content-Type': 'application/json' }
-		});
-	} else {
-		response = new Response("Invalid request", { status: 404 });
-	}
+    let response;
+    if (url.pathname === '/') {
+        const lang = url.searchParams.get('lang') || 'zh-TW'; 
+        const answer = await getRandomAnswerFromKV(lang);
+        response = new Response(JSON.stringify({ answer: answer }), {
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } else if (url.pathname === '/RandomPassword') {
+        const password = generateRandomPassword();
+        response = new Response(JSON.stringify({ RandomPassword: password }), {
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } else if (url.pathname === '/TangPoetry') {
+        const poem = await getRandomPoemFromKV();
+        response = new Response(JSON.stringify({ poem: poem }), {
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } else if (url.pathname === '/TempleOracleJP') {
+        const oracle = await getRandomOracleFromKV();
+        response = new Response(JSON.stringify({ oracle: oracle }), {
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } else if (url.pathname === '/greWord') {
+        const greWord = await getRandomGreWordFromKV();
+        response = new Response(JSON.stringify({ greWord: greWord }), {
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } else if (url.pathname === '/SP500') {
+        const sp500Data = await ANSWERS_BOOK.get("SP500", "json");
+        response = new Response(JSON.stringify({ SP500: sp500Data }), {
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } else if (url.pathname === '/TW0050') {
+        const tw0050Data = await ANSWERS_BOOK.get("TW0050", "json");
+        response = new Response(JSON.stringify({ TW0050: tw0050Data }), {
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } else if (url.pathname === '/TW0051') {
+        const tw0051Data = await ANSWERS_BOOK.get("TW0051", "json");
+        response = new Response(JSON.stringify({ TW0051: tw0051Data }), {
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } else if (url.pathname === '/nasdaq100') {
+        const nasdaq100Data = await ANSWERS_BOOK.get("nasdaq100", "json");
+        response = new Response(JSON.stringify({ nasdaq100: nasdaq100Data }), {
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } else if (url.pathname === '/dowjones') {
+        const dowjonesData = await ANSWERS_BOOK.get("dowjones", "json");
+        response = new Response(JSON.stringify({ dowjones: dowjonesData }), {
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } else {
+        response = new Response("Invalid request", { status: 404 });
+    }    
+
 
 	// 添加 CORS headers
 	response.headers.set('Access-Control-Allow-Origin', '*');

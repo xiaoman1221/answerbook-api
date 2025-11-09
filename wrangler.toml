@@ -72,7 +72,7 @@ compatibility_flags = ["nodejs_compat"]
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#kv-namespaces
 [[kv_namespaces]]
 binding = "ANSWERS_BOOK"
-id = "${env.ANSWERSBOOK_KV}"
+id = "d456bf7af82b40e28c26dfa70828f8cb"
 
 # Bind an mTLS certificate. Use to present a client certificate when communicating with another service.
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#mtls-certificates
